@@ -14,69 +14,92 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author Alexander
+ * @author vfgya
  */
 @Entity
-public class PaperBook extends Book implements Serializable {
-    
-     private static final long serialVersionUID = 1L;
+public class PaperBook implements Serializable
+{
+
+    @OneToOne(mappedBy = "paperBook")
+    private Book book;
+
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long isbn;
-
-    public PaperBook(int shippingWeight, boolean inStock, long isbn, String title, String author, int price) {
-        super(isbn, title, author, price);
-        this.shippingWeight = shippingWeight;
-        this.inStock = inStock;
-    }
-
-    public PaperBook(){
-        
-    }
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
-    private int shippingWeight;
+    private int shippingWieght;
+    
+    private int inStock;
+    
 
-    public int getShippingWeight() {
-        return shippingWeight;
+    public Long getId()
+    {
+        return id;
     }
 
-    public void setShippingWeight(int shippingWeight) {
-        this.shippingWeight = shippingWeight;
+    public Book getBook()
+    {
+        return book;
     }
 
-    public boolean isInStock() {
+    public void setBook(Book book)
+    {
+        this.book = book;
+    }
+
+    
+    
+    public int getShippingWieght()
+    {
+        return shippingWieght;
+    }
+
+    public void setShippingWieght(int shippingWieght)
+    {
+        this.shippingWieght = shippingWieght;
+    }
+
+    public int getInStock()
+    {
         return inStock;
     }
 
-    public void setInStock(boolean inStock) {
+    public void setInStock(int inStock)
+    {
         this.inStock = inStock;
     }
     
-    private boolean inStock;
+    
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
-        hash += (isbn != null ? isbn.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the isbn fields are not set
-        if (!(object instanceof PaperBook)) {
+    public boolean equals(Object object)
+    {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof PaperBook))
+        {
             return false;
         }
         PaperBook other = (PaperBook) object;
-        if ((this.isbn == null && other.isbn != null) || (this.isbn != null && !this.isbn.equals(other.isbn))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
-        return "entity.PaperBook[ id=" + isbn + " ]";
+    public String toString()
+    {
+        return "entity.PaperBook[ id=" + id + " ]";
     }
     
 }

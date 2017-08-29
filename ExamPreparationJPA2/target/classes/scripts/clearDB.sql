@@ -1,0 +1,2 @@
+DROP DATABASE jpaem;
+CREATE DATABASE jpaem;

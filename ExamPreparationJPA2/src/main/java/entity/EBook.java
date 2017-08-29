@@ -14,68 +14,79 @@ import javax.persistence.OneToOne;
 
 /**
  *
- * @author Alexander
+ * @author vfgya
  */
 @Entity
-public class EBook extends Book implements Serializable {
-    
+public class EBook implements Serializable
+{
+
+    @OneToOne(mappedBy = "eBook")
+    private Book book;
+
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long isbn;
-
-    public EBook(String downloadUrl, int sizeMB, long isbn, String title, String author, int price) {
-        super(isbn, title, author, price);
-        this.downloadUrl = downloadUrl;
-        this.sizeMB = sizeMB;
-    }
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
-    public EBook(){
-        
-    }
-
     private String downloadUrl;
+    
     private int sizeMB;
 
-    public String getDownloadUrl() {
+    public Long getId()
+    {
+        return id;
+    }
+
+    public String getDownloadUrl()
+    {
         return downloadUrl;
     }
 
-    public void setDownloadUrl(String downloadUrl) {
+    public void setDownloadUrl(String downloadUrl)
+    {
         this.downloadUrl = downloadUrl;
     }
 
-    public int getSizeMB() {
+    public int getSizeMB()
+    {
         return sizeMB;
     }
 
-    public void setSizeMB(int sizeMB) {
+    public void setSizeMB(int sizeMB)
+    {
         this.sizeMB = sizeMB;
     }
 
+    
+    
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         int hash = 0;
-        hash += (isbn != null ? isbn.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the isbn fields are not set
-        if (!(object instanceof EBook)) {
+    public boolean equals(Object object)
+    {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof EBook))
+        {
             return false;
         }
         EBook other = (EBook) object;
-        if ((this.isbn == null && other.isbn != null) || (this.isbn != null && !this.isbn.equals(other.isbn))) {
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id)))
+        {
             return false;
         }
         return true;
     }
 
     @Override
-    public String toString() {
-        return "entity.EBoook[ id=" + isbn + " ]";
+    public String toString()
+    {
+        return "entity.EBook[ id=" + id + " ]";
     }
     
 }
